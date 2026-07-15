@@ -1,16 +1,141 @@
-# React + Vite
+# 🎙️ Voice Deepfake Lab — 음성 딥페이크 체험 플랫폼
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+> **"직접 들어봐야 안 속는다"**
+> AI가 생성한 딥페이크 음성을 체험하고, 의심 포인트를 태깅하며, 보이스피싱 판별 능력을 기르는 교육 서비스
 
-Currently, two official plugins are available:
+<br />
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 📌 프로젝트 개요
 
-## React Compiler
+딥페이크 음성 기술을 **방어 목적의 교육 도구**로 역이용하여, 시민이 보이스피싱에 속지 않도록 실전 체험 훈련을 제공합니다.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+<br />
 
-## Expanding the Oxlint configuration
+## 🗺️ 체험 플로우
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
+```
+① 인트로        →  서비스 소개 및 체험 안내
+② 전화 수신     →  실제 전화 오는 것처럼 연출
+③ 음성 재생     →  딥페이크 음성 청취 + 실시간 의심 태깅 🚩
+④ 이유 선택     →  왜 의심했는지 선택 (복수 선택)
+⑤ A/B 퀴즈     →  원본 vs 딥페이크 중 어느 쪽인지 맞추기
+⑥ 결과 리포트  →  탐지율 점수 + 구간별 피드백 + 신고 안내
+```
+
+<br />
+
+## ✨ 주요 기능
+
+| 기능 | 설명 |
+|------|------|
+| 🚩 실시간 태깅 | 음성 재생 중 의심되는 순간 버튼을 눌러 타임스탬프 기록 |
+| 📊 탐지율 점수 | 실제 딥페이크 특징 구간과 내 태깅 위치를 비교해 점수 산출 |
+| 🎯 A/B 퀴즈 | 원본 음성 vs 딥페이크 음성 중 진짜를 맞추는 판별 훈련 |
+| 📋 구간별 피드백 | 어느 구간이 딥페이크 특징이었는지 이유와 함께 설명 |
+| 📚 교육 허브 | 얼굴·문서·실시간 딥페이크 등 유형별 카드뉴스 교육 자료 |
+
+<br />
+
+## 🛠️ 기술 스택
+
+| 분류 | 기술 |
+|------|------|
+| Frontend | React 18, Vite |
+| 음성 생성 | ElevenLabs TTS API |
+| 오디오 처리 | Web Audio API |
+| 스타일 | CSS-in-JS (inline styles) |
+
+<br />
+
+## 📁 프로젝트 구조
+
+```
+voice-deepfake-lab/
+├── public/
+│   └── audio/
+│       ├── scenario_a_deepfake.mp3   # ElevenLabs 생성 딥페이크 음성
+│       └── scenario_a_original.mp3   # 원본 비교 음성
+├── src/
+│   ├── App.jsx                       # 메인 앱 (전체 플로우)
+│   └── main.jsx
+├── README.md
+└── package.json
+```
+
+<br />
+
+## 🚀 실행 방법
+
+```bash
+# 1. 레포 클론
+git clone https://github.com/mina89531027/-.git
+cd voice-deepfake-lab
+
+# 2. 패키지 설치
+npm install
+
+# 3. 개발 서버 실행
+npm run dev
+```
+
+> 브라우저에서 `http://localhost:5173` 접속
+
+<br />
+
+## 🎙️ 음성 파일 준비 방법
+
+실제 체험을 위해 음성 파일이 필요합니다.
+
+**딥페이크 음성 생성 (ElevenLabs)**
+1. [ElevenLabs](https://elevenlabs.io) 가입 (무료 플랜으로 충분)
+2. Text to Speech → 시나리오 스크립트 입력
+3. Stability `0.85` / Style `0.0` 설정 (평탄하고 기계적인 느낌)
+4. Generate → mp3 다운로드
+5. `public/audio/scenario_a_deepfake.mp3` 로 저장
+
+**원본 음성 녹음**
+- 같은 스크립트를 팀원이 직접 녹음
+- 스마트폰 기본 녹음 앱 사용
+- `public/audio/scenario_a_original.mp3` 로 저장
+
+<br />
+
+## 📋 시나리오 목록
+
+| # | 유형 | 상태 |
+|---|------|------|
+| A | 검찰 사칭 | ✅ 구현 완료 |
+| B | 가족 납치 협박 | 🔜 준비 중 |
+| C | 금융기관 사칭 | 🔜 준비 중 |
+
+<br />
+
+## 🗓️ 개발 로드맵
+
+- [x] 전체 체험 플로우 프로토타입
+- [x] 실시간 타임스탬프 태깅
+- [x] A/B 퀴즈 + 결과 리포트
+- [ ] 실제 음성 파일 연결
+- [ ] 시나리오 3종 완성
+- [ ] 교육 허브 카드뉴스 연결
+- [ ] 개인화 취약도 리포트
+- [ ] 얼굴 딥페이크 체험 모듈 (향후 확장)
+
+<br />
+
+## ⚠️ 윤리 고지
+
+- 본 서비스의 모든 음성은 **교육 목적으로 생성된 AI 합성 음성**입니다
+- 실제 특정인의 목소리를 복제하지 않았습니다
+- 음성 파일은 서비스 내 재생 전용이며 다운로드를 제공하지 않습니다
+- 딥페이크 **판별 능력 향상**에만 집중하며, 제작 방법은 일절 노출하지 않습니다
+
+<br />
+
+## 📞 실제 피해 발생 시
+
+| 기관 | 연락처 |
+|------|--------|
+| 경찰청 | ☎ 112 |
+| 금융감독원 | ☎ 182 |
+| 사이버범죄 신고 | [police.go.kr](https://www.police.go.kr) |
